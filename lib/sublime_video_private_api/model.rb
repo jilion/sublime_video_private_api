@@ -1,4 +1,5 @@
 require 'active_support/concern'
+require 'kaminari'
 require 'kaminari/models/array_extension'
 
 module SublimeVideoPrivateApi

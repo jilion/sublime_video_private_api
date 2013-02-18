@@ -10,7 +10,7 @@ describe 'Server' do
   end
 
   context 'authenticated' do
-    before { set_api_auth_token }
+    before { set_api_credentials }
 
     it "returns 200" do
       get 'private_api/foos.json', {}, @env

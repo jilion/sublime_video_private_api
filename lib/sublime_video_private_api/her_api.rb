@@ -1,5 +1,4 @@
 require 'her'
-require 'faraday'
 
 require 'sublime_video_private_api/faraday/token_authentication'
 require 'sublime_video_private_api/faraday/response/headers_parser'
@@ -30,8 +29,8 @@ module SublimeVideoPrivateApi
         connection.use Her::Middleware::AcceptJSON
         connection.use SublimeVideoPrivateApi::Faraday::Response::HeadersParser
         connection.use SublimeVideoPrivateApi::Faraday::Response::BodyParser
-        connection.use Faraday::Request::UrlEncoded
-        connection.use Faraday::Adapter::NetHttp
+        connection.use ::Faraday::Request::UrlEncoded
+        connection.use ::Faraday::Adapter::NetHttp
       end
     end
   end
