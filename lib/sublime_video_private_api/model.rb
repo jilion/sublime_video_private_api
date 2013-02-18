@@ -1,6 +1,7 @@
 require 'active_support/concern'
 require 'kaminari'
 require 'kaminari/models/array_extension'
+require 'sublime_video_private_api/her_api'
 
 module SublimeVideoPrivateApi
   module Model
