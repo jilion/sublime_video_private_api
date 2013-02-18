@@ -15,9 +15,8 @@ module SublimeVideoPrivateApi
     end
 
     module ClassMethods
-
       def uses_private_api(subdomain)
-        uses_api HerAPI.new(subdomain).api
+        uses_api HerApi.new(subdomain).api
       end
 
       def all(params = {})

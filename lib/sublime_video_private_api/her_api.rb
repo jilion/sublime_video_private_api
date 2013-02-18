@@ -6,13 +6,13 @@ require 'sublime_video_private_api/faraday/response/body_parser'
 require 'sublime_video_private_api/url'
 
 module SublimeVideoPrivateApi
-  class HerAPI
+  class HerApi
     attr_reader :subdomain, :api
 
     def initialize(subdomain)
       @subdomain = subdomain.to_s
       @api = Her::API.new
-      @api.setup
+      setup
     end
 
     def url
