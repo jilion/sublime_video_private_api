@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sublime_video_private_api (1.0.0)
+    sublime_video_private_api (1.0.2)
       her
       kaminari
       rails (>= 3.2.12)
