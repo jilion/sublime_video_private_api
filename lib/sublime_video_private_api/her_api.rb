@@ -12,7 +12,7 @@ module SublimeVideoPrivateApi
     def initialize(subdomain)
       @subdomain = subdomain.to_s
       @api = Her::API.new
-      setup
+      setup unless Rails.env == 'test'
     end
 
     def url
