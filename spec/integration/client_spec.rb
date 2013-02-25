@@ -25,6 +25,15 @@ describe SublimeVideoPrivateApi::Model do
       end
     end
 
+    describe ".find_each" do
+      it "iterates on pages" do
+        Foo.should_receive(:all).with(page: 1, per: 2) { [1,2] }
+        Foo.should_receive(:all).with(page: 2, per: 2) { [3] }
+
+        Foo.find_each(batch_size: 2) {}
+      end
+    end
+
     describe ".count" do
       it "returns size from all" do
         Foo.count.should eq 2

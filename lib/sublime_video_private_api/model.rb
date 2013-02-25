@@ -28,6 +28,17 @@ module SublimeVideoPrivateApi
           total_count: results.metadata[:total_count]).page(params[:page])
       end
 
+      def find_each(params = {})
+        per_page = params.delete(:batch_size) || 1000
+        page     = 1
+
+        begin
+          records = all(params.merge(per: per_page, page: page))
+          records.each { |r| yield(r) }
+          page += 1
+        end until records.size < per_page
+      end
+
       def count(params = {})
         all(params).total_count
       end
