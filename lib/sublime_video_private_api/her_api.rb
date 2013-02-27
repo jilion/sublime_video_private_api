@@ -31,6 +31,7 @@ module SublimeVideoPrivateApi
         connection.use SublimeVideoPrivateApi::Faraday::Response::BodyParser
         connection.use ::Faraday::Request::UrlEncoded
         connection.use ::Faraday::Adapter::NetHttp
+        connection.use ::Faraday::Response::RaiseError
       end
     end
   end

@@ -1,3 +1,6 @@
+require 'faraday'
+require 'active_support/core_ext'
+
 module SublimeVideoPrivateApi
   module Faraday
     module Response
@@ -10,10 +13,11 @@ module SublimeVideoPrivateApi
 
         def parse_headers(env)
           env[:response_headers].tap do |headers|
-            env[:body][:metadata][:page] = headers['X-Page'].to_i if headers.include?('X-Page')
-            env[:body][:metadata][:limit] = headers['X-Limit'].to_i if headers.include?('X-Limit')
-            env[:body][:metadata][:offset] = headers['X-Offset'].to_i if headers.include?('X-Offset')
-            env[:body][:metadata][:total_count] = headers['X-Total-Count'].to_i if headers.include?('X-Total-Count')
+            %w[Page Limit Offset Total-Count].each do |data|
+              if headers.include?("X-#{data}")
+                env[:body][:metadata][data.underscore.to_sym] = headers["X-#{data}"].to_i
+              end
+            end
           end
           env[:body]
         end

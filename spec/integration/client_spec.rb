@@ -58,4 +58,14 @@ describe SublimeVideoPrivateApi::Model do
     it { should be_persisted }
   end
 
+  describe "inexistent object" do
+    before {
+      stub_api_for(Foo) do |stub|
+        stub.get("/private_api/foos/1")   { |env| [404, {}, nil] }
+      end
+    }
+
+    it { expect { Foo.find(1) }.to raise_error(Faraday::Error::ResourceNotFound)  }
+  end
+
 end

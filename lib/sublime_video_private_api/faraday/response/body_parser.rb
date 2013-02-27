@@ -1,3 +1,7 @@
+require 'faraday'
+require 'active_support/core_ext'
+require 'multi_json'
+
 module SublimeVideoPrivateApi
   module Faraday
     module Response
@@ -14,8 +18,7 @@ module SublimeVideoPrivateApi
             :errors => {},
             :metadata => {}
           }
-          if body.present?
-            json = MultiJson.load(body, symbolize_keys: true)
+          if body.present? && (json = MultiJson.load(body, symbolize_keys: true))
             default_body[:errors]   = json.delete(:errors) if json.include?(:errors)
             default_body[:metadata] = json.delete(:metadata) if json.include?(:metadata)
             default_body[:data]     = json
