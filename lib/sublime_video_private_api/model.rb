@@ -42,6 +42,12 @@ module SublimeVideoPrivateApi
       def count(params = {})
         all(params).total_count
       end
+
+      def find(*ids)
+        super(*ids)
+      rescue ::Faraday::Error::ResourceNotFound
+        raise ActiveRecord::RecordNotFound
+      end
     end
 
     def created_at
