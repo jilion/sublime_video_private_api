@@ -41,6 +41,21 @@ describe SublimeVideoPrivateApi::Model do
     end
   end
 
+  describe "get_raw" do
+    let(:data) { ['foo'] }
+    before {
+      stub_api_for(Foo) do |stub|
+        stub.get("/private_api/bar")   { |env| [200, {}, data.to_json] }
+      end
+    }
+
+    it "returns custom data" do
+      Foo.get_raw('/private_api/bar') do |parsed_data|
+        parsed_data[:data] = data
+      end
+    end
+  end
+
   describe "object" do
     let(:foo) { create(:foo) }
     before {
