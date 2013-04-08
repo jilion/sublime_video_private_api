@@ -6,13 +6,7 @@ require 'sublime_video_private_api/her_api'
 module SublimeVideoPrivateApi
   module Model
     extend ActiveSupport::Concern
-
-    include ActiveModel::Conversion
     include Her::Model
-
-    included do
-      extend ActiveModel::Naming
-    end
 
     module ClassMethods
       def uses_private_api(subdomain)
@@ -51,11 +45,11 @@ module SublimeVideoPrivateApi
     end
 
     def created_at
-      @created_at ||= Time.parse(@data[:created_at])
+      @created_at ||= Time.parse(get_data(:created_at))
     end
 
     def updated_at
-      @created_at ||= Time.parse(@data[:created_at])
+      @created_at ||= Time.parse(get_data(:updated_at))
     end
 
     def persisted?
