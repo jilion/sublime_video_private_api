@@ -1,4 +1,5 @@
 require 'active_support/concern'
+require 'rescue_me'
 require 'kaminari'
 require 'kaminari/models/array_extension'
 require 'sublime_video_private_api/her_api'
@@ -14,12 +15,14 @@ module SublimeVideoPrivateApi
       end
 
       def all(params = {})
-        results = super(params)
-        Kaminari.paginate_array(
-          results,
-          limit: results.metadata[:limit],
-          offset: results.metadata[:offset],
-          total_count: results.metadata[:total_count]).page(params[:page])
+        rescue_and_retry(3) do
+          results = super(params)
+          Kaminari.paginate_array(
+            results,
+            limit: results.metadata[:limit],
+            offset: results.metadata[:offset],
+            total_count: results.metadata[:total_count]).page(params[:page])
+        end
       end
 
       def find_each(params = {})
@@ -38,7 +41,9 @@ module SublimeVideoPrivateApi
       end
 
       def find(*ids)
-        super(*ids)
+        rescue_and_retry(3) do
+          super(*ids)
+        end
       rescue ::Faraday::Error::ResourceNotFound
         raise ActiveRecord::RecordNotFound
       end
