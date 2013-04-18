@@ -44,8 +44,8 @@ module SublimeVideoPrivateApi
         rescue_and_retry(3) do
           super(*ids)
         end
-      rescue ::Faraday::Error::ResourceNotFound
-        raise ActiveRecord::RecordNotFound
+      rescue ::Faraday::Error::ResourceNotFound => ex
+        raise(defined?(ActiveRecord) ? ActiveRecord::RecordNotFound : ex)
       end
     end
 

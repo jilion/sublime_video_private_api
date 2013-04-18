@@ -11,12 +11,13 @@ module SublimeVideoPrivateApi
     private
 
     def subdomain
-      return nil if Rails.env == 'test'
+      return nil if SublimeVideoPrivateApi.env == 'test'
+
       @subdomain == 'www' ? nil : @subdomain
     end
 
     def host
-      case Rails.env
+      case SublimeVideoPrivateApi.env
       when 'development' then 'sublimevideo.dev'
       when 'production'  then 'sublimevideo.net'
       when 'staging'     then 'sublimevideo-staging.net'
@@ -25,7 +26,7 @@ module SublimeVideoPrivateApi
     end
 
     def scheme
-      case Rails.env
+      case SublimeVideoPrivateApi.env
       when 'development', 'test'   then 'http://'
       when 'production', 'staging' then 'https://'
       end

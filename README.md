@@ -1,16 +1,15 @@
 # SublimeVideoPrivateApi
 
-This Rails engine provides utility for creating models & controller that can easily speach eachother alongs all SublimeVideo Rails apps.
+This Rails engine provides utility for creating models & controllers that can easily speak to each other between all the SublimeVideo web apps.
 
 Depends on `her`, `responders` & `kaminari` gems.
 
 ## Usage
 
-
-
 ### Client Side
 
-Just extend your models this way:
+1. Include `SublimeVideoPrivateApi::Model` in your model
+2. Define the app that holds the records with `uses_private_api :app_subdomain`
 
 ``` ruby
 class Foo
@@ -44,7 +43,7 @@ and in your `config/routes.rb` :
   end
 ```
 
-### Deployement to http://gemfury.com/
+### Deployement to http://gemfury.com
 
 Update `VERSION` in `lib/sublime_video_layout/version.rb` to `X.Y.Z` and then run the following commands:
 
@@ -56,4 +55,5 @@ sublime_video_private_api X.Y.Z built to pkg/sublime_video_private_api-X.Y.Z.gem
 ```
 
 ------------
-Copyright (c) 2010 - 2013 Jilion(r) - SublimeVideo and Jilion are registered trademarks
+
+Copyright (c) 2010 - 2013 Jilion(r) - SublimeVideo and Jilion are registered trademarks.
