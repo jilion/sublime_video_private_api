@@ -43,7 +43,7 @@ and in your `config/routes.rb` :
   end
 ```
 
-### Deployement to http://gemfury.com
+### Deployment to http://gemfury.com
 
 Update `VERSION` in `lib/sublime_video_layout/version.rb` to `X.Y.Z` and then run the following commands:
 
