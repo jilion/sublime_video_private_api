@@ -80,7 +80,7 @@ describe SublimeVideoPrivateApi::Model do
       end
     }
 
-    it { expect { Foo.find(1) }.to raise_error(ActiveRecord::RecordNotFound)  }
+    it { expect { Foo.find(1) }.to raise_error(Faraday::Error::ResourceNotFound)  }
   end
 
 end
