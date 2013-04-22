@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir['spec/**/*']
 
   s.add_dependency 'activesupport', '>= 3.2'
-  s.add_dependency 'her',           '~> 0.5.3'
+  s.add_dependency 'her',           '~> 0.6.1'
   s.add_dependency 'multi_json'
   s.add_dependency 'kaminari'
   s.add_dependency 'responders'
