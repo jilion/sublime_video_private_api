@@ -1,4 +1,4 @@
-require 'sublime_video_private_api/engine' if defined? Rails
+require 'sublime_video_private_api/engine' if defined?(Rails) && defined?(Rails::Engine)
 require 'sublime_video_private_api/model'
 
 module SublimeVideoPrivateApi
