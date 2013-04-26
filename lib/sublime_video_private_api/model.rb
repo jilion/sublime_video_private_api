@@ -46,11 +46,11 @@ module SublimeVideoPrivateApi
     end
 
     def created_at
-      @created_at ||= Time.parse(get_data(:created_at))
+      @created_at ||= Time.parse(get_attribute(:created_at))
     end
 
     def updated_at
-      @created_at ||= Time.parse(get_data(:updated_at))
+      @created_at ||= Time.parse(get_attribute(:updated_at))
     end
 
     def persisted?
