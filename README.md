@@ -48,10 +48,10 @@ and in your `config/routes.rb` :
 Update `VERSION` in `lib/sublime_video_layout/version.rb` to `X.Y.Z` and then run the following commands:
 
 ``` bash
-> bundle install
-> rake build
+> bi
+> be rake build
 sublime_video_private_api X.Y.Z built to pkg/sublime_video_private_api-X.Y.Z.gem
-> bundle exec fury push pkg/sublime_video_private_api-X.Y.Z.gem
+> be fury push pkg/sublime_video_private_api-X.Y.Z.gem
 ```
 
 ------------

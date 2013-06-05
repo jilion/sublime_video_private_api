@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = SublimeVideoPrivateApi::VERSION
   s.authors     = ['Jilion']
   s.email       = ['info@jilion.com']
-  s.homepage    = 'http://jilion.com'
+  s.homepage    = 'https://github.com/jilion/sublime_video_private_api'
   s.summary     = 'Private API utility engine for SublimeVideo applications.'
   s.description = 'Private API utility engine for SublimeVideo applications, especially models & controller'
 
