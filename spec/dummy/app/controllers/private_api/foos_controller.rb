@@ -2,12 +2,14 @@ class PrivateApi::FoosController < SublimeVideoPrivateApiController
   before_filter :find_foo, only: [:show, :update, :destroy]
 
   def index
+    expires_in 2.minutes
     @foos = FooServer.page(params[:page])
     respond_with(@foos)
   end
 
   def show
-    respond_with(@foo)
+    expires_in 2.minutes
+    respond_with(@foo) if stale?(@foo)
   end
 
   def create

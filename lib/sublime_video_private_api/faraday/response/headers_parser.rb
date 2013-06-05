@@ -4,7 +4,10 @@ require 'active_support/core_ext'
 module SublimeVideoPrivateApi
   module Faraday
     module Response
+
       class HeadersParser < ::Faraday::Response::Middleware
+        ::Faraday.register_middleware :response, headers_parser: HeadersParser
+
         def on_complete(env)
           env[:body] = parse_headers(env)
         end
@@ -22,6 +25,7 @@ module SublimeVideoPrivateApi
           env[:body]
         end
       end
+
     end
   end
 end
