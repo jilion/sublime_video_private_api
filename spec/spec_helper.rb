@@ -1,6 +1,6 @@
 ENV['RAILS_ENV'] ||= 'test'
 
-require File.expand_path("../dummy/config/environment.rb",  __FILE__)
+require File.expand_path('../dummy/config/environment.rb',  __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 
@@ -18,6 +18,10 @@ RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
   config.fail_fast = ENV['FAST_FAIL'] != 'false'
   config.order = ENV['ORDER'] || 'random'
+
+  config.before do
+    Rails.cache.clear
+  end
 end
 
 require 'factory_girl_rails'

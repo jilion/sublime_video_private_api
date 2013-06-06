@@ -7,8 +7,8 @@ require 'sublime_video_private_api/version'
 Gem::Specification.new do |s|
   s.name        = 'sublime_video_private_api'
   s.version     = SublimeVideoPrivateApi::VERSION
-  s.authors     = ['Jilion']
-  s.email       = ['info@jilion.com']
+  s.authors     = ['Thibaud Guillaume-Gentil', 'Rémy Coutable']
+  s.email       = ['thibaud@jilion.com', 'remy@jilion.com']
   s.homepage    = 'https://github.com/jilion/sublime_video_private_api'
   s.summary     = 'Private API utility engine for SublimeVideo applications.'
   s.description = 'Private API utility engine for SublimeVideo applications, especially models & controller'
@@ -16,8 +16,9 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib}/**/*'] + %w[Rakefile README.md]
   s.test_files = Dir['spec/**/*']
 
-  s.add_dependency 'activesupport', '>= 3.2'
-  s.add_dependency 'her',           '~> 0.6.1'
+  s.add_dependency 'activesupport',      '>= 3.2'
+  s.add_dependency 'her',                '~> 0.6.1'
+  s.add_dependency 'faraday-http-cache', '~> 0.2.0'
   s.add_dependency 'multi_json'
   s.add_dependency 'kaminari'
   s.add_dependency 'responders'

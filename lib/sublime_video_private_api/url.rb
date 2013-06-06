@@ -1,3 +1,5 @@
+require 'sublime_video_private_api'
+
 module SublimeVideoPrivateApi
   class Url
     def initialize(subdomain)

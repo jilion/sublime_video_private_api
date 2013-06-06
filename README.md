@@ -27,20 +27,27 @@ Add your controllers in `app/controllers/private_api/` this way:
 class PrivateApi::FoosController < SublimeVideoPrivateApiController
 
   def index
+    expires_in 2.minutes, public: true # enable caching
     @foos = Foo.page(params[:page])
     respond_with(@foos)
+  end
+
+  def show
+    expires_in 2.minutes, public: true # enable caching
+    @foo = Foo.find(params[:id])
+    respond_with(@foo) if stale?(@foo)
   end
 
   # ...
 end
 ```
 
-and in your `config/routes.rb` :
+and in your `config/routes.rb`:
 
 ``` ruby
-  namespace :private_api do
-    resources :foos
-  end
+namespace :private_api do
+  resources :foos
+end
 ```
 
 ### Deployment to http://gemfury.com
@@ -48,10 +55,10 @@ and in your `config/routes.rb` :
 Update `VERSION` in `lib/sublime_video_layout/version.rb` to `X.Y.Z` and then run the following commands:
 
 ``` bash
-> bi
-> be rake build
+$ bi
+$ be rake build
 sublime_video_private_api X.Y.Z built to pkg/sublime_video_private_api-X.Y.Z.gem
-> be fury push pkg/sublime_video_private_api-X.Y.Z.gem
+$ be fury push pkg/sublime_video_private_api-X.Y.Z.gem
 ```
 
 ------------
