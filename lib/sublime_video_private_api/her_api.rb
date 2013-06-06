@@ -1,6 +1,6 @@
 require 'her'
 
-require 'sublime_video_private_api/faraday/token_authentication'
+require 'faraday-http-cache'
 require 'sublime_video_private_api/faraday/response/headers_parser'
 require 'sublime_video_private_api/faraday/response/body_parser'
 require 'sublime_video_private_api/url'
@@ -25,13 +25,17 @@ module SublimeVideoPrivateApi
 
     def setup
       @api.setup url: url, ssl: ssl_options do |connection|
-        connection.use SublimeVideoPrivateApi::Faraday::TokenAuthentication, token: SublimeVideoPrivateApi.token
+        connection.request :token_auth, SublimeVideoPrivateApi.token
         connection.use Her::Middleware::AcceptJSON
-        connection.use SublimeVideoPrivateApi::Faraday::Response::HeadersParser
-        connection.use SublimeVideoPrivateApi::Faraday::Response::BodyParser
-        connection.use ::Faraday::Request::UrlEncoded
-        connection.use ::Faraday::Adapter::NetHttp
-        connection.use ::Faraday::Response::RaiseError
+        connection.request :url_encoded # form-encode POST params
+
+        connection.response :raise_error
+        connection.response :headers_parser
+        connection.response :body_parser
+
+        connection.use :http_cache, SublimeVideoPrivateApi.cache_store
+
+        connection.adapter :net_http
       end
     end
   end

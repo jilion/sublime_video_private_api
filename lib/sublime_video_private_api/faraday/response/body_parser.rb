@@ -5,7 +5,10 @@ require 'multi_json'
 module SublimeVideoPrivateApi
   module Faraday
     module Response
+
       class BodyParser < ::Faraday::Response::Middleware
+        ::Faraday.register_middleware :response, body_parser: BodyParser
+
         def on_complete(env)
           env[:body] = parse_body(env[:body])
         end
@@ -27,6 +30,7 @@ module SublimeVideoPrivateApi
           default_body
         end
       end
+
     end
   end
 end

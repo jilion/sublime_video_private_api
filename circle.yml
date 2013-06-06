@@ -1,0 +1,6 @@
+## Customize database setup
+database:
+  override:
+    # replace Circle's generated database.yml
+    - cp spec/dummy/config/database.yml.ci spec/dummy/config/database.yml
+    - RAILS_ENV=test RACK_ENV=test bundle exec rake app:db:setup --trace
