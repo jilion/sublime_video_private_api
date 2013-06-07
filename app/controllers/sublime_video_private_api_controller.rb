@@ -8,7 +8,9 @@ class SublimeVideoPrivateApiController < ActionController::Base
 
   responders SublimeVideoPrivateApi::Responders::PaginationHeadersResponder
 
-  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  if defined? ActiveRecord
+    rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  end
 
   private
 
