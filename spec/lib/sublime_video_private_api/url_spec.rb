@@ -16,6 +16,13 @@ describe SublimeVideoPrivateApi::Url do
       subject { SublimeVideoPrivateApi::Url.new('my') }
       its(:url) { should eq 'http://my.sublimevideo.dev/private_api' }
     end
+
+    context "my subdomain with MY_PRIVATE_API_ENV=production" do
+      subject { SublimeVideoPrivateApi::Url.new('my') }
+      before { ENV["MY_PRIVATE_API_ENV"] = 'production' }
+      its(:url) { should eq 'https://my.sublimevideo.net/private_api' }
+      after { ENV["MY_PRIVATE_API_ENV"] = nil }
+    end
   end
 
   context "production Rails.env" do
