@@ -8,29 +8,29 @@ module SublimeVideoPrivateApi
       end
 
       def to_format
-        add_pagination_headers!
+        _add_pagination_headers!
         super
       end
 
     private
 
-      def add_pagination_headers!
-        return unless paginated_resource?
-        set_headers
+      def _add_pagination_headers!
+        return unless _paginated_resource?
+        _set_headers
       end
 
-      def paginated_resource?
+      def _paginated_resource?
         resource.respond_to?(:current_page)
       end
 
-      def set_headers
-        set_header('X-Page',        resource.current_page)
-        set_header('X-Offset',      resource.offset_value)
-        set_header('X-Limit',       resource.limit_value)
-        set_header('X-Total-Count', resource.total_count)
+      def _set_headers
+        _set_header('X-Page',        resource.current_page)
+        _set_header('X-Offset',      resource.offset_value)
+        _set_header('X-Limit',       resource.limit_value)
+        _set_header('X-Total-Count', resource.total_count)
       end
 
-      def set_header(header_name, value)
+      def _set_header(header_name, value)
         controller.response.headers[header_name] = value.to_s
       end
 

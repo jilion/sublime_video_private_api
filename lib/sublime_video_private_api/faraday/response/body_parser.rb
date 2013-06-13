@@ -10,12 +10,12 @@ module SublimeVideoPrivateApi
         ::Faraday.register_middleware :response, body_parser: BodyParser
 
         def on_complete(env)
-          env[:body] = parse_body(env[:body])
+          env[:body] = _parse_body(env[:body])
         end
 
         private
 
-        def parse_body(body)
+        def _parse_body(body)
           default_body = {
             data: {},
             errors: {},
