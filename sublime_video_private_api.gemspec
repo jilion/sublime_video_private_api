@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'multi_json'
   s.add_dependency 'kaminari'
   s.add_dependency 'responders'
+  s.add_dependency 'timecop'
   s.add_dependency 'rescue_me'
 
   s.add_development_dependency 'rails'
