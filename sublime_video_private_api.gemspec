@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'activesupport',      '>= 3.2'
   s.add_dependency 'her',                '~> 0.6.1'
-  s.add_dependency 'faraday-http-cache', '~> 0.2.0'
+  s.add_dependency 'faraday-http-cache', '~> 0.2.1'
   s.add_dependency 'multi_json'
   s.add_dependency 'kaminari'
   s.add_dependency 'responders'
