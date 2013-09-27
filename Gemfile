@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 gemspec
 
-group :tools do
-  gem 'ruby_gntp'
-  gem 'guard-rspec'
-  gem 'gemfury'
+group :development do
+  gem 'ruby_gntp', require: false
+  gem 'guard-rspec', require: false
+  gem 'gemfury', require: false
 end

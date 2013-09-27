@@ -45,30 +45,30 @@ shared_examples 'valid caching headers' do |opts = {}|
     options = { cache_control: 'max-age=120, public', cache_validation: true }.merge(opts)
     get url, {}, @env
 
-    response.status.should eq 200
-    response.headers['Cache-Control'].should eq options[:cache_control]
+    expect(response.status).to eq 200
+    expect(response.headers['Cache-Control']).to eq options[:cache_control]
     if options[:cache_validation]
-      (etag = response.headers['ETag']).should be_present
-      (last_modified = response.headers['Last-Modified']).should eq record.updated_at.httpdate
+      expect(etag = response.headers['ETag']).to be_present
+      expect(last_modified = response.headers['Last-Modified']).to eq record.updated_at.httpdate
 
       Timecop.travel(5.seconds.from_now) do
         # Conditional request
         @env.merge!('HTTP_IF_NONE_MATCH' => etag, 'HTTP_IF_MODIFIED_SINCE' => last_modified)
         get url, {}, @env
 
-        response.status.should eq 304
-        response.headers['Cache-Control'].should eq options[:cache_control]
-        response.headers['ETag'].should eq etag
-        response.headers['Last-Modified'].should eq last_modified
+        expect(response.status).to eq 304
+        expect(response.headers['Cache-Control']).to eq options[:cache_control]
+        expect(response.headers['ETag']).to eq etag
+        expect(response.headers['Last-Modified']).to eq last_modified
 
         # Make the resource staled
         record.touch
 
         get url, {}, @env
-        response.status.should eq 200
-        response.headers['Cache-Control'].should eq options[:cache_control]
-        response.headers['ETag'].should_not eq etag
-        response.headers['Last-Modified'].should_not eq last_modified
+        expect(response.status).to eq 200
+        expect(response.headers['Cache-Control']).to eq options[:cache_control]
+        expect(response.headers['ETag']).not_to eq etag
+        expect(response.headers['Last-Modified']).not_to eq last_modified
       end
     end
   end

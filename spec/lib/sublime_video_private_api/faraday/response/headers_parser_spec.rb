@@ -16,7 +16,7 @@ describe SublimeVideoPrivateApi::Faraday::Response::HeadersParser do
       }
     }
     parser.on_complete(env)
-    env[:body].should eq(metadata: {
+    expect(env[:body]).to eq(metadata: {
       page: 1,
       limit: 10,
       offset: 1,

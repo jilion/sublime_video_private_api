@@ -5,7 +5,7 @@ describe 'Server' do
   context 'unauthenticated' do
     it "returns 401" do
       get 'private_api/foos.json', {}, @env
-      response.status.should eq 401
+      expect(response.status).to eq 401
     end
   end
 
@@ -18,15 +18,15 @@ describe 'Server' do
 
       it "returns 200" do
         get url, {}, @env
-        response.status.should eq 200
+        expect(response.status).to eq 200
       end
 
       it "sets pagination headers" do
         get url, {}, @env
-        response.headers['X-Page'].should eq '1'
-        response.headers['X-Limit'].should eq '25'
-        response.headers['X-Offset'].should eq '0'
-        response.headers['X-Total-Count'].should eq '0'
+        expect(response.headers['X-Page']).to eq '1'
+        expect(response.headers['X-Limit']).to eq '25'
+        expect(response.headers['X-Offset']).to eq '0'
+        expect(response.headers['X-Total-Count']).to eq '0'
       end
     end
 
@@ -40,7 +40,7 @@ describe 'Server' do
 
       it "returns 200" do
         get url, {}, @env
-        response.status.should eq 200
+        expect(response.status).to eq 200
       end
     end
   end

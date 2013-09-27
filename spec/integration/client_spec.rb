@@ -18,18 +18,18 @@ describe SublimeVideoPrivateApi::Model do
 
     describe ".all" do
       it "returns all foos from API" do
-        Foo.all.should have(2).foos
+        expect(Foo.all).to have(2).foos
       end
 
       it "returns paginated collection" do
-        Foo.all.total_count.should eq 2
+        expect(Foo.all.total_count).to eq 2
       end
     end
 
     describe ".find_each" do
       it "iterates on pages" do
-        Foo.should_receive(:all).with(page: 1, per: 2) { [1,2] }
-        Foo.should_receive(:all).with(page: 2, per: 2) { [3] }
+        expect(Foo).to receive(:all).with(page: 1, per: 2) { [1,2] }
+        expect(Foo).to receive(:all).with(page: 2, per: 2) { [3] }
 
         Foo.find_each(batch_size: 2) {}
       end
@@ -37,7 +37,7 @@ describe SublimeVideoPrivateApi::Model do
 
     describe ".count" do
       it "returns size from all" do
-        Foo.count.should eq 2
+        expect(Foo.count).to eq 2
       end
     end
   end
@@ -77,7 +77,7 @@ describe SublimeVideoPrivateApi::Model do
     it 'caches the result' do
       2.times { Foo.find(foo.id) }
 
-      @requests.should eq 1
+      expect(@requests).to eq 1
     end
   end
 
