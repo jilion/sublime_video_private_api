@@ -33,7 +33,7 @@ module SublimeVideoPrivateApi
         connection.response :headers_parser
         connection.response :body_parser
 
-        connection.use :http_cache, SublimeVideoPrivateApi.cache_store
+        connection.use :http_cache, store: SublimeVideoPrivateApi.cache_store
 
         connection.adapter :net_http
       end
